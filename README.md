@@ -1,5 +1,7 @@
 # Jarvis OS v5.5 - Advanced AR HUD
 
+**🌐 Live Demo:** [https://yvnpretty.github.io/vr/](https://yvnpretty.github.io/vr/)
+
 Este repositorio contiene una aplicación de Realidad Aumentada (AR) de última generación inspirada en la interfaz de Jarvis (Stark Industries). Construida con **React**, **MediaPipe Hands** y **Tailwind CSS**, permite una interacción touchless completa mediante gestos manuales.
 
 ## 🚀 Características Principales
