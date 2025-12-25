@@ -29,6 +29,7 @@ export default function App() {
   const lastPosRef = useRef({ x: 50, y: 50 });
   const isPinchingRef = useRef(false);
   const pinchDistRef = useRef(0);
+  const [cameraMode, setCameraMode] = useState('environment'); // 'environment' o 'user'
 
   // --- 1. Inicialización de Cámara y Hand Tracking ---
   useEffect(() => {
@@ -149,7 +150,7 @@ export default function App() {
       },
       width: 1280,
       height: 720,
-      facingMode: 'environment' // Usar cámara trasera en iPhone
+      facingMode: cameraMode
     });
 
     // En iOS, a veces se necesita un gesto del usuario para iniciar
@@ -170,7 +171,12 @@ export default function App() {
       window.removeEventListener('start-camera', startCamera);
       if (handsRef.current) handsRef.current.close();
     };
-  }, []);
+  }, [cameraMode]);
+
+  const toggleCamera = () => {
+    setCameraMode(prev => prev === 'environment' ? 'user' : 'environment');
+    setIsCameraReady(false);
+  };
 
   // --- 2. Lógica de Dibujo y Logs ---
   useEffect(() => {
@@ -246,7 +252,7 @@ export default function App() {
       setSystemLogs(prev => [events[Math.floor(Math.random() * events.length)], ...prev.slice(0, 4)]);
     }, 3000);
     return () => clearInterval(logInterval);
-  }, []);
+  }, [isPinching]);
 
   const clearCanvas = () => setPaths([]);
 
@@ -270,24 +276,21 @@ export default function App() {
       />
 
       {!isCameraReady && !error && (
-        <div className="absolute inset-0 z-50 bg-black flex flex-col items-center justify-center p-6 text-center">
-          <RefreshCw className="text-cyan-500 animate-spin mb-6" size={64} />
-          <h2 className="text-cyan-400 font-black text-xl mb-2 tracking-[0.3em] uppercase">Jarvis OS v5.5</h2>
-          <p className="text-cyan-500/60 text-xs mb-8 max-w-xs uppercase tracking-widest">Esperando autorización de sensores biométricos...</p>
+        <div className="absolute inset-0 z-50 bg-black flex flex-col items-center justify-center p-8 text-center">
+          <RefreshCw className="text-cyan-500 animate-spin mb-8" size={80} />
+          <h2 className="text-cyan-400 font-black text-2xl mb-4 tracking-[0.4em] uppercase">Jarvis OS v5.5</h2>
+          <p className="text-cyan-500/60 text-sm mb-12 max-w-xs uppercase tracking-widest leading-relaxed">
+            Inicializando protocolos de Realidad Aumentada...
+          </p>
 
           <button
             onClick={() => {
               if (videoRef.current) {
-                // Forzar inicio en iOS
-                const video = videoRef.current;
-                video.play();
-                // El evento onFrame de MediaPipe se encargará del resto si ya se llamó a camera.start()
-                // Pero para estar seguros, intentamos disparar el inicio de la cámara
-                const event = new CustomEvent('start-camera');
-                window.dispatchEvent(event);
+                videoRef.current.play();
+                window.dispatchEvent(new CustomEvent('start-camera'));
               }
             }}
-            className="ar-box px-8 py-4 border-2 border-cyan-500 bg-cyan-500/20 text-cyan-400 font-black tracking-[0.4em] hover:bg-cyan-500 hover:text-white transition-all active:scale-95 pointer-events-auto"
+            className="ar-box px-12 py-6 border-2 border-cyan-500 bg-cyan-500/20 text-cyan-400 font-black text-lg tracking-[0.5em] hover:bg-cyan-500 hover:text-white transition-all active:scale-95 pointer-events-auto shadow-[0_0_30px_rgba(0,255,255,0.3)]"
           >
             SYNC NEURAL LINK
           </button>
@@ -398,55 +401,50 @@ export default function App() {
           to { transform: translateY(100vh); }
         }
         .ar-box {
-          background: rgba(0, 0, 0, 0.7);
-          border: 1px solid rgba(34, 211, 238, 0.5);
-          backdrop-filter: blur(8px);
-          border-radius: 4px;
+          background: rgba(0, 0, 0, 0.8);
+          border: 1px solid rgba(34, 211, 238, 0.4);
+          backdrop-filter: blur(12px);
+          border-radius: 8px;
+        }
+        .vertical-text {
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
         }
       `}</style>
 
-      <div className="absolute inset-0 z-20 flex flex-col justify-between p-6 pointer-events-none">
-        <div className="flex justify-between items-start">
-          <div className="flex gap-4">
-            <div className="ar-box p-4 border-l-4 border-l-cyan-500">
-              <div className="flex items-center gap-3 mb-2">
+      <div className="absolute inset-0 z-20 flex flex-col justify-between p-5 pointer-events-none">
+        {/* Header - Modular y Espaciado */}
+        <div className="flex flex-col gap-4">
+          <div className="flex justify-between items-start">
+            <div className="ar-box p-4 border-l-4 border-l-cyan-500 flex-1 mr-4">
+              <div className="flex items-center gap-3 mb-1">
                 <div className="w-2 h-2 bg-cyan-400 animate-pulse rounded-full shadow-[0_0_10px_cyan]"></div>
-                <h1 className="text-cyan-400 text-sm font-black uppercase tracking-[0.3em]">Jarvis OS v5.2</h1>
+                <h1 className="text-cyan-400 text-xs font-black uppercase tracking-[0.2em]">Jarvis OS v5.5</h1>
               </div>
-              <div className="text-2xl font-mono font-bold tracking-tighter text-white/90">
+              <div className="text-xl font-mono font-bold tracking-tighter text-white/90">
                 {time.toLocaleTimeString([], { hour12: false })}
               </div>
             </div>
 
-            <div className="ar-box p-3 w-48 h-16 overflow-hidden border-cyan-500/20">
-              <div className="text-[7px] text-cyan-500/50 uppercase font-bold mb-1">System Logs</div>
-              <div className="space-y-1">
-                {systemLogs.map((log, i) => (
-                  <div key={i} className="text-[8px] text-cyan-400/80 font-mono truncate animate-in slide-in-from-left duration-300">
-                    {`> ${log}`}
-                  </div>
-                ))}
-              </div>
-            </div>
+            <button
+              onClick={toggleCamera}
+              className="pointer-events-auto ar-box p-4 border-cyan-500/50 hover:bg-cyan-500/20 active:scale-95 transition-all flex items-center justify-center"
+              title="Voltear Cámara"
+            >
+              <RefreshCw size={24} className="text-cyan-400" />
+            </button>
           </div>
 
-          <div className="flex flex-col gap-2 items-end">
-            <div className="ar-box p-3 text-right border-r-4 border-r-yellow-500">
-              <div className="text-[10px] text-yellow-500 uppercase font-black mb-1">Neural Link</div>
-              <div className="flex items-center gap-2 justify-end">
-                <div className={`w-1 h-3 bg-yellow-500/30 ${isHandActive ? 'animate-pulse' : ''}`}></div>
-                <div className={`w-1 h-5 bg-yellow-500/50 ${isHandActive ? 'animate-pulse delay-75' : ''}`}></div>
-                <div className={`w-1 h-4 bg-yellow-500 ${isHandActive ? 'animate-pulse delay-150' : ''}`}></div>
-                <span className="text-xs font-bold text-white">{isHandActive ? 'CONNECTED' : 'SEARCHING'}</span>
-              </div>
+          {/* Logs - Apilados Verticalmente */}
+          <div className="ar-box p-3 w-full max-w-[280px] border-cyan-500/20">
+            <div className="text-[8px] text-cyan-500/50 uppercase font-bold mb-2 tracking-widest">System Telemetry</div>
+            <div className="space-y-1.5">
+              {systemLogs.map((log, i) => (
+                <div key={i} className="text-[9px] text-cyan-400/80 font-mono truncate animate-in slide-in-from-left duration-300">
+                  {`> ${log}`}
+                </div>
+              ))}
             </div>
-            <button
-              onClick={clearCanvas}
-              className="pointer-events-auto ar-box p-3 hover:bg-red-500/20 border-red-500/50 transition-colors flex items-center gap-2"
-            >
-              <RefreshCw size={14} className="text-red-400" />
-              <span className="text-[10px] font-black text-red-400 uppercase">Clear HUD</span>
-            </button>
           </div>
         </div>
 
@@ -460,60 +458,60 @@ export default function App() {
           </div>
         </div>
 
-        <div className="flex justify-between items-end pointer-events-auto">
-          <div className="flex gap-4 items-end">
-            <div className="flex flex-col gap-2">
-              <button
-                onClick={() => setActivePanel('main')}
-                className={`ar-box p-5 transition-all group ${activePanel === 'main' ? 'bg-cyan-500/30 border-cyan-400 shadow-[0_0_20px_rgba(0,255,255,0.2)]' : 'opacity-40 hover:opacity-100'}`}
-              >
-                <Target size={28} className="text-cyan-400 group-hover:scale-110 transition-transform" />
-              </button>
-              <button
-                onClick={() => setActivePanel('weather')}
-                className={`ar-box p-5 transition-all group ${activePanel === 'weather' ? 'bg-cyan-500/30 border-cyan-400 shadow-[0_0_20px_rgba(0,255,255,0.2)]' : 'opacity-40 hover:opacity-100'}`}
-              >
-                <Scan size={28} className="text-cyan-400 group-hover:scale-110 transition-transform" />
-              </button>
-            </div>
-
-            {/* Floating Color Palette */}
-            <div className="ar-box p-3 flex gap-3 items-center mb-1 animate-in slide-in-from-bottom duration-500">
+        {/* Footer - Diseño Modular y Botones Grandes */}
+        <div className="flex flex-col gap-6">
+          {/* Paleta de Colores - Botones de 44px+ */}
+          <div className="flex justify-center">
+            <div className="ar-box p-3 flex gap-4 items-center pointer-events-auto shadow-2xl border-white/10">
               {['#00ffff', '#ff00ff', '#ffff00', '#00ff00'].map(c => (
-                <div
+                <button
                   key={c}
-                  className={`w-8 h-8 rounded-full border-2 transition-all cursor-pointer ${currentColor === c ? 'scale-125 border-white shadow-[0_0_15px_white]' : 'border-transparent opacity-50'}`}
+                  className={`w-11 h-11 rounded-full border-2 transition-all active:scale-90 ${currentColor === c ? 'scale-110 border-white shadow-[0_0_20px_white]' : 'border-transparent opacity-40'}`}
                   style={{ backgroundColor: c }}
                   onClick={() => setCurrentColor(c)}
                 />
               ))}
-              <div className="w-[1px] h-8 bg-white/10 mx-1"></div>
-              <div className="text-[8px] text-white/50 uppercase font-black vertical-text">Palette</div>
+              <div className="w-[1px] h-8 bg-white/20 mx-1"></div>
+              <button
+                onClick={clearCanvas}
+                className="w-11 h-11 flex items-center justify-center text-red-400 hover:bg-red-500/10 rounded-full transition-colors"
+              >
+                <RefreshCw size={20} />
+              </button>
             </div>
           </div>
 
-          <div className="ar-box p-4 max-w-[220px] border-b-4 border-b-cyan-500">
-            <div className="text-[9px] text-cyan-500 font-black uppercase mb-2 tracking-[0.2em] flex items-center gap-2">
-              <Hand size={12} /> Biometric Interface
+          <div className="flex justify-between items-end gap-4">
+            <div className="flex gap-3 pointer-events-auto">
+              <button
+                onClick={() => setActivePanel('main')}
+                className={`ar-box p-5 transition-all active:scale-90 ${activePanel === 'main' ? 'bg-cyan-500/30 border-cyan-400' : 'opacity-40'}`}
+              >
+                <Target size={32} className="text-cyan-400" />
+              </button>
+              <button
+                onClick={() => setActivePanel('weather')}
+                className={`ar-box p-5 transition-all active:scale-90 ${activePanel === 'weather' ? 'bg-cyan-500/30 border-cyan-400' : 'opacity-40'}`}
+              >
+                <Scan size={32} className="text-cyan-400" />
+              </button>
             </div>
-            <div className="space-y-2 text-[9px] text-gray-400 font-mono">
-              <div className="flex justify-between">
-                <span>PULSE:</span>
-                <span className="text-green-400">72 BPM</span>
+
+            <div className="ar-box p-4 flex-1 max-w-[180px] border-b-4 border-b-cyan-500">
+              <div className="text-[10px] text-cyan-500 font-black uppercase mb-2 tracking-widest flex items-center gap-2">
+                <Hand size={14} /> Biometrics
               </div>
-              <div className="flex justify-between">
-                <span>STRESS:</span>
-                <span className="text-cyan-400">LOW</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Z-DEPTH:</span>
-                <span className="text-white">{handZ.toFixed(1)}u</span>
-              </div>
-              <div className="flex justify-between">
-                <span>PINCH DIST:</span>
-                <span className={`font-bold ${isPinching ? 'text-green-400' : 'text-yellow-400'}`}>
-                  {pinchDistRef.current?.toFixed(3) || '0.000'}
-                </span>
+              <div className="space-y-2 text-[10px] text-gray-400 font-mono">
+                <div className="flex justify-between">
+                  <span>STRESS:</span>
+                  <span className="text-cyan-400">LOW</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>PINCH:</span>
+                  <span className={`font-bold ${isPinching ? 'text-green-400' : 'text-yellow-400'}`}>
+                    {pinchDistRef.current?.toFixed(3)}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -522,32 +520,29 @@ export default function App() {
 
       <div className="absolute inset-0 z-30 pointer-events-none flex items-center justify-center">
         {activePanel === 'weather' && (
-          <div className="ar-box p-8 animate-in zoom-in fade-in duration-500 pointer-events-auto max-w-md w-full">
-            <h2 className="text-cyan-400 font-black text-xl mb-6 tracking-widest uppercase border-b border-cyan-500/20 pb-4">Environmental Analysis</h2>
-            <div className="grid grid-cols-2 gap-6">
-              <div className="space-y-1">
-                <div className="text-[10px] text-cyan-500/60 uppercase">Luminosity</div>
-                <div className="text-2xl font-bold">84%</div>
+          <div className="absolute inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-6 pointer-events-auto">
+            <div className="ar-box w-full max-w-sm p-8 animate-in zoom-in duration-300">
+              <h2 className="text-cyan-400 font-black text-2xl mb-8 tracking-widest uppercase border-b border-cyan-500/20 pb-4">Environmental Scan</h2>
+              <div className="grid grid-cols-1 gap-6 mb-10">
+                {[
+                  { label: 'Luminosity', val: '84%', color: 'text-white' },
+                  { label: 'Atmosphere', val: 'Stable', color: 'text-white' },
+                  { label: 'Visibility', val: 'High', color: 'text-green-400' },
+                  { label: 'Threat Level', val: 'Zero', color: 'text-blue-400' }
+                ].map((item, i) => (
+                  <div key={i} className="flex justify-between items-center p-4 bg-white/5 rounded-lg border border-white/5">
+                    <span className="text-[11px] text-cyan-500/60 uppercase font-bold">{item.label}</span>
+                    <span className={`text-xl font-black ${item.color}`}>{item.val}</span>
+                  </div>
+                ))}
               </div>
-              <div className="space-y-1">
-                <div className="text-[10px] text-cyan-500/60 uppercase">Atmosphere</div>
-                <div className="text-2xl font-bold">Stable</div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-[10px] text-cyan-500/60 uppercase">Visibility</div>
-                <div className="text-2xl font-bold text-green-400">High</div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-[10px] text-cyan-500/60 uppercase">Threat Level</div>
-                <div className="text-2xl font-bold text-blue-400">Zero</div>
-              </div>
+              <button
+                onClick={() => setActivePanel('main')}
+                className="w-full bg-cyan-600 hover:bg-cyan-500 text-white py-5 rounded-xl font-black text-lg tracking-[0.3em] uppercase transition-all active:scale-95 shadow-lg"
+              >
+                Close Analysis
+              </button>
             </div>
-            <button
-              onClick={() => setActivePanel('main')}
-              className="w-full mt-8 bg-cyan-600 hover:bg-cyan-500 text-white py-3 font-black tracking-widest uppercase transition-all"
-            >
-              Close Analysis
-            </button>
           </div>
         )}
       </div>
