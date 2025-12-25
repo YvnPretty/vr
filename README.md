@@ -1,68 +1,57 @@
-# AR Shared View Prototype - Unity
+# Jarvis OS v5.5 - Advanced AR HUD
 
-Este proyecto es un prototipo funcional de un juego de Realidad Aumentada (AR) desarrollado en Unity utilizando **AR Foundation**. Permite la detección de superficies, interacción con objetos AR y la capacidad de compartir la vista en tiempo real con otro usuario.
+Este repositorio contiene una aplicación de Realidad Aumentada (AR) de última generación inspirada en la interfaz de Jarvis (Stark Industries). Construida con **React**, **MediaPipe Hands** y **Tailwind CSS**, permite una interacción touchless completa mediante gestos manuales.
 
-## Requisitos Técnicos
+## 🚀 Características Principales
 
-- **Unity 2021.3 LTS** o superior.
-- **AR Foundation** (v4.x o v5.x).
-- **ARCore XR Plugin** (para Android).
-- **ARKit XR Plugin** (para iOS).
-- **TextMeshPro** para la interfaz de usuario.
+- **Detección de Gestos 3D**:
+  - **Pinch (Pinza)**: Inicia el modo de dibujo en el espacio AR.
+  - **Palm Open (Palma)**: Activa el borrador holográfico de precisión.
+  - **Still Hand (Mano Quieta)**: Inicia el proceso de fijación de objetivo (Target Lock).
+- **Dibujo Holográfico Avanzado**:
+  - **Lift Pen**: Soporte para múltiples trazos independientes.
+  - **Z-Depth Awareness**: El grosor del trazo cambia dinámicamente según la distancia de la mano a la cámara.
+  - **Sistema de Partículas**: Efectos visuales de luz al dibujar.
+- **HUD Biométrico y Telemetría**:
+  - Visualización en tiempo real de BPM, niveles de estrés y profundidad Z.
+  - Esqueleto de mano holográfico proyectado sobre la imagen real.
+  - Consola de logs del sistema con eventos dinámicos.
+- **Paleta de Colores Interactiva**: Cambia el color de tus trazos (Cian, Magenta, Amarillo, Verde) mediante hover o selección directa.
 
-## Estructura del Proyecto
+## 🛠️ Tecnologías Utilizadas
 
-- `Assets/Scripts/ARPlacementManager.cs`: Maneja la colocación de objetos en planos detectados.
-- `Assets/Scripts/ARInteractable.cs`: Permite mover, rotar y escalar objetos AR mediante gestos táctiles.
-- `Assets/Scripts/ARViewSharer.cs`: Captura la cámara y la posición para transmitirla.
-- `Assets/Scripts/ARViewReceiver.cs`: Recibe y visualiza la escena compartida.
-- `Assets/Scripts/UIManager.cs`: Controla la interfaz de usuario básica.
+- **React 18**: Framework principal de la UI.
+- **MediaPipe Hands**: Motor de IA para el seguimiento de manos y detección de landmarks.
+- **Tailwind CSS 4**: Estilizado premium con efectos de glassmorphism y animaciones sci-fi.
+- **Lucide React**: Iconografía técnica y minimalista.
+- **Vite**: Herramienta de construcción ultra rápida.
 
-## Configuración de la Escena (Unity Hierarchy)
+## 📦 Instalación y Uso
 
-1. **AR Session Origin**:
-   - Añadir componente `AR Plane Manager`.
-   - Añadir componente `AR Raycast Manager`.
-   - Añadir componente `AR Placement Manager` (asignar un Prefab).
-2. **AR Session**: Controla el ciclo de vida de la experiencia AR.
-3. **Main Camera**:
-   - Asegurarse de que tiene el componente `AR Camera Manager` y `AR Camera Background`.
-   - Añadir el script `ARViewSharer.cs`.
-4. **Canvas**:
-   - Botón "Compartir Vista" -> Conectar a `UIManager`.
-   - Texto de estado.
+1.  Clona el repositorio:
+    ```bash
+    git clone https://github.com/YvnPretty/vr.git
+    ```
+2.  Navega a la carpeta del proyecto:
+    ```bash
+    cd ar_game
+    ```
+3.  Instala las dependencias:
+    ```bash
+    npm install
+    ```
+4.  Inicia el servidor de desarrollo:
+    ```bash
+    npm run dev
+    ```
+5.  Abre tu navegador en `http://localhost:5173` y concede permisos de cámara.
 
-## Funcionalidad de Compartir Vista
+## 🎮 Guía de Interacción
 
-El sistema utiliza un enfoque de **Streaming de Datos + Frames**:
-1. **Captura**: El `ARViewSharer` toma un "screenshot" de la cámara AR y captura la posición/rotación (`Pose`).
-2. **Compresión**: La imagen se comprime en JPG para reducir el ancho de banda.
-3. **Sincronización**: Se envía un objeto `ARFrameData` que contiene la imagen y la transformación espacial.
-4. **Visualización**: El receptor aplica la imagen a un `RawImage` y mueve una cámara virtual a la posición recibida, replicando exactamente lo que el emisor ve.
+- **Para Dibujar**: Junta el dedo índice y el pulgar. Mueve la mano para crear trazos.
+- **Para Borrar**: Abre la palma de la mano y pásala sobre los dibujos que desees eliminar.
+- **Para Cambiar Color**: Pasa el cursor sobre los círculos de color en la parte inferior de la pantalla.
+- **Target Lock**: Mantén la mano quieta sobre un punto para que el sistema fije el objetivo.
 
-## 🌐 WebSocket Bridge (Conexión Web)
-
-Para ver la transmisión en el navegador, debes ejecutar el servidor puente:
-
-1.  Asegúrate de tener **Node.js** instalado.
-2.  Navega a la carpeta `bridge/`.
-3.  Ejecuta: `node server.js`.
-4.  Abre `web_viewer/index.html` en tu navegador (o usa el servidor local en el puerto 3000).
-
-## 💎 Interfaz Premium (Unity)
-
-He añadido `ARPremiumUI.cs` para una experiencia visual superior:
-- **Efectos de Fade-in**: La interfaz aparece suavemente al iniciar.
-- **Indicadores de Pulso**: Animación visual cuando la transmisión está activa.
-- **Paneles Contextuales**: Cambia entre modo exploración y modo transmisión.
-
-## Configuración de la Escena (Actualizada)
-
-1. **Canvas**:
-   - Añadir `ARPremiumUI` al objeto Canvas.
-   - Vincular los paneles (Main, Sharing) y botones.
-   - Añadir un `CanvasGroup` para el efecto de fade.
-2. **Main Camera**:
-   - Asegurarse de que `ARViewSharer` esté presente.
-3. **AR Network Manager**:
-   - Configurar la IP del servidor puente (tu PC).
+---
+Desarrollado con ❤️ para una experiencia AR inmersiva.
