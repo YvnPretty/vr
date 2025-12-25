@@ -1,0 +1,570 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 0
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 12
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    predictedCPUUsage: 1
+    bakedLightIndex: -1
+    statsLevel: 2
+    samplingLevel: 1
+    directLightInDirectSamples: 64
+    directLightInDirectSamples_v2: 64
+    indirectLightInDirectSamples: 64
+    indirectLightInDirectSamples_v2: 64
+    environmentSamples: 256
+    environmentSamples_v2: 256
+    lightProbeSampleCount: 4
+    lightProbeSampleCount_v2: 4
+    aoSamples: 256
+    aoSamples_v2: 256
+    aoExponent: 1
+    aoMaxDistance: 1
+    aoDirectContribution: 0
+    aoDirectContribution_v2: 0
+    aoIndirectContribution: 1
+    aoIndirectContribution_v2: 1
+    aoBakeMode: 0
+    aoBakeMode_v2: 0
+    aoSmoothness: 0
+    aoSmoothness_v2: 0
+    aoEdgeDetection: 1
+    aoEdgeDetection_v2: 1
+    aoEdgeDetectionThreshold: 0.1
+    aoEdgeDetectionThreshold_v2: 0.1
+    aoEdgeDetectionRange: 1
+    aoEdgeDetectionRange_v2: 1
+    aoEdgeDetectionBias: 0.1
+    aoEdgeDetectionBias_v2: 0.1
+    aoEdgeDetectionSharpness: 0.1
+    aoEdgeDetectionSharpness_v2: 0.1
+    aoEdgeDetectionSharpness_v2_1: 0.1
+    aoEdgeDetectionSharpness_v2_2: 0.1
+    aoEdgeDetectionSharpness_v2_3: 0.1
+    aoEdgeDetectionSharpness_v2_4: 0.1
+    aoEdgeDetectionSharpness_v2_5: 0.1
+    aoEdgeDetectionSharpness_v2_6: 0.1
+    aoEdgeDetectionSharpness_v2_7: 0.1
+    aoEdgeDetectionSharpness_v2_8: 0.1
+    aoEdgeDetectionSharpness_v2_9: 0.1
+    aoEdgeDetectionSharpness_v2_10: 0.1
+    aoEdgeDetectionSharpness_v2_11: 0.1
+    aoEdgeDetectionSharpness_v2_12: 0.1
+    aoEdgeDetectionSharpness_v2_13: 0.1
+    aoEdgeDetectionSharpness_v2_14: 0.1
+    aoEdgeDetectionSharpness_v2_15: 0.1
+    aoEdgeDetectionSharpness_v2_16: 0.1
+    aoEdgeDetectionSharpness_v2_17: 0.1
+    aoEdgeDetectionSharpness_v2_18: 0.1
+    aoEdgeDetectionSharpness_v2_19: 0.1
+    aoEdgeDetectionSharpness_v2_20: 0.1
+    aoEdgeDetectionSharpness_v2_21: 0.1
+    aoEdgeDetectionSharpness_v2_22: 0.1
+    aoEdgeDetectionSharpness_v2_23: 0.1
+    aoEdgeDetectionSharpness_v2_24: 0.1
+    aoEdgeDetectionSharpness_v2_25: 0.1
+    aoEdgeDetectionSharpness_v2_26: 0.1
+    aoEdgeDetectionSharpness_v2_27: 0.1
+    aoEdgeDetectionSharpness_v2_28: 0.1
+    aoEdgeDetectionSharpness_v2_29: 0.1
+    aoEdgeDetectionSharpness_v2_30: 0.1
+    aoEdgeDetectionSharpness_v2_31: 0.1
+    aoEdgeDetectionSharpness_v2_32: 0.1
+    aoEdgeDetectionSharpness_v2_33: 0.1
+    aoEdgeDetectionSharpness_v2_34: 0.1
+    aoEdgeDetectionSharpness_v2_35: 0.1
+    aoEdgeDetectionSharpness_v2_36: 0.1
+    aoEdgeDetectionSharpness_v2_37: 0.1
+    aoEdgeDetectionSharpness_v2_38: 0.1
+    aoEdgeDetectionSharpness_v2_39: 0.1
+    aoEdgeDetectionSharpness_v2_40: 0.1
+    aoEdgeDetectionSharpness_v2_41: 0.1
+    aoEdgeDetectionSharpness_v2_42: 0.1
+    aoEdgeDetectionSharpness_v2_43: 0.1
+    aoEdgeDetectionSharpness_v2_44: 0.1
+    aoEdgeDetectionSharpness_v2_45: 0.1
+    aoEdgeDetectionSharpness_v2_46: 0.1
+    aoEdgeDetectionSharpness_v2_47: 0.1
+    aoEdgeDetectionSharpness_v2_48: 0.1
+    aoEdgeDetectionSharpness_v2_49: 0.1
+    aoEdgeDetectionSharpness_v2_50: 0.1
+    aoEdgeDetectionSharpness_v2_51: 0.1
+    aoEdgeDetectionSharpness_v2_52: 0.1
+    aoEdgeDetectionSharpness_v2_53: 0.1
+    aoEdgeDetectionSharpness_v2_54: 0.1
+    aoEdgeDetectionSharpness_v2_55: 0.1
+    aoEdgeDetectionSharpness_v2_56: 0.1
+    aoEdgeDetectionSharpness_v2_57: 0.1
+    aoEdgeDetectionSharpness_v2_58: 0.1
+    aoEdgeDetectionSharpness_v2_59: 0.1
+    aoEdgeDetectionSharpness_v2_60: 0.1
+    aoEdgeDetectionSharpness_v2_61: 0.1
+    aoEdgeDetectionSharpness_v2_62: 0.1
+    aoEdgeDetectionSharpness_v2_63: 0.1
+    aoEdgeDetectionSharpness_v2_64: 0.1
+    aoEdgeDetectionSharpness_v2_65: 0.1
+    aoEdgeDetectionSharpness_v2_66: 0.1
+    aoEdgeDetectionSharpness_v2_67: 0.1
+    aoEdgeDetectionSharpness_v2_68: 0.1
+    aoEdgeDetectionSharpness_v2_69: 0.1
+    aoEdgeDetectionSharpness_v2_70: 0.1
+    aoEdgeDetectionSharpness_v2_71: 0.1
+    aoEdgeDetectionSharpness_v2_72: 0.1
+    aoEdgeDetectionSharpness_v2_73: 0.1
+    aoEdgeDetectionSharpness_v2_74: 0.1
+    aoEdgeDetectionSharpness_v2_75: 0.1
+    aoEdgeDetectionSharpness_v2_76: 0.1
+    aoEdgeDetectionSharpness_v2_77: 0.1
+    aoEdgeDetectionSharpness_v2_78: 0.1
+    aoEdgeDetectionSharpness_v2_79: 0.1
+    aoEdgeDetectionSharpness_v2_80: 0.1
+    aoEdgeDetectionSharpness_v2_81: 0.1
+    aoEdgeDetectionSharpness_v2_82: 0.1
+    aoEdgeDetectionSharpness_v2_83: 0.1
+    aoEdgeDetectionSharpness_v2_84: 0.1
+    aoEdgeDetectionSharpness_v2_85: 0.1
+    aoEdgeDetectionSharpness_v2_86: 0.1
+    aoEdgeDetectionSharpness_v2_87: 0.1
+    aoEdgeDetectionSharpness_v2_88: 0.1
+    aoEdgeDetectionSharpness_v2_89: 0.1
+    aoEdgeDetectionSharpness_v2_90: 0.1
+    aoEdgeDetectionSharpness_v2_91: 0.1
+    aoEdgeDetectionSharpness_v2_92: 0.1
+    aoEdgeDetectionSharpness_v2_93: 0.1
+    aoEdgeDetectionSharpness_v2_94: 0.1
+    aoEdgeDetectionSharpness_v2_95: 0.1
+    aoEdgeDetectionSharpness_v2_96: 0.1
+    aoEdgeDetectionSharpness_v2_97: 0.1
+    aoEdgeDetectionSharpness_v2_98: 0.1
+    aoEdgeDetectionSharpness_v2_99: 0.1
+    aoEdgeDetectionSharpness_v2_100: 0.1
+    aoEdgeDetectionSharpness_v2_101: 0.1
+    aoEdgeDetectionSharpness_v2_102: 0.1
+    aoEdgeDetectionSharpness_v2_103: 0.1
+    aoEdgeDetectionSharpness_v2_104: 0.1
+    aoEdgeDetectionSharpness_v2_105: 0.1
+    aoEdgeDetectionSharpness_v2_106: 0.1
+    aoEdgeDetectionSharpness_v2_107: 0.1
+    aoEdgeDetectionSharpness_v2_108: 0.1
+    aoEdgeDetectionSharpness_v2_109: 0.1
+    aoEdgeDetectionSharpness_v2_110: 0.1
+    aoEdgeDetectionSharpness_v2_111: 0.1
+    aoEdgeDetectionSharpness_v2_112: 0.1
+    aoEdgeDetectionSharpness_v2_113: 0.1
+    aoEdgeDetectionSharpness_v2_114: 0.1
+    aoEdgeDetectionSharpness_v2_115: 0.1
+    aoEdgeDetectionSharpness_v2_116: 0.1
+    aoEdgeDetectionSharpness_v2_117: 0.1
+    aoEdgeDetectionSharpness_v2_118: 0.1
+    aoEdgeDetectionSharpness_v2_119: 0.1
+    aoEdgeDetectionSharpness_v2_120: 0.1
+    aoEdgeDetectionSharpness_v2_121: 0.1
+    aoEdgeDetectionSharpness_v2_122: 0.1
+    aoEdgeDetectionSharpness_v2_123: 0.1
+    aoEdgeDetectionSharpness_v2_124: 0.1
+    aoEdgeDetectionSharpness_v2_125: 0.1
+    aoEdgeDetectionSharpness_v2_126: 0.1
+    aoEdgeDetectionSharpness_v2_127: 0.1
+    aoEdgeDetectionSharpness_v2_128: 0.1
+    aoEdgeDetectionSharpness_v2_129: 0.1
+    aoEdgeDetectionSharpness_v2_130: 0.1
+    aoEdgeDetectionSharpness_v2_131: 0.1
+    aoEdgeDetectionSharpness_v2_132: 0.1
+    aoEdgeDetectionSharpness_v2_133: 0.1
+    aoEdgeDetectionSharpness_v2_134: 0.1
+    aoEdgeDetectionSharpness_v2_135: 0.1
+    aoEdgeDetectionSharpness_v2_136: 0.1
+    aoEdgeDetectionSharpness_v2_137: 0.1
+    aoEdgeDetectionSharpness_v2_138: 0.1
+    aoEdgeDetectionSharpness_v2_139: 0.1
+    aoEdgeDetectionSharpness_v2_140: 0.1
+    aoEdgeDetectionSharpness_v2_141: 0.1
+    aoEdgeDetectionSharpness_v2_142: 0.1
+    aoEdgeDetectionSharpness_v2_143: 0.1
+    aoEdgeDetectionSharpness_v2_144: 0.1
+    aoEdgeDetectionSharpness_v2_145: 0.1
+    aoEdgeDetectionSharpness_v2_146: 0.1
+    aoEdgeDetectionSharpness_v2_147: 0.1
+    aoEdgeDetectionSharpness_v2_148: 0.1
+    aoEdgeDetectionSharpness_v2_149: 0.1
+    aoEdgeDetectionSharpness_v2_150: 0.1
+    aoEdgeDetectionSharpness_v2_151: 0.1
+    aoEdgeDetectionSharpness_v2_152: 0.1
+    aoEdgeDetectionSharpness_v2_153: 0.1
+    aoEdgeDetectionSharpness_v2_154: 0.1
+    aoEdgeDetectionSharpness_v2_155: 0.1
+    aoEdgeDetectionSharpness_v2_156: 0.1
+    aoEdgeDetectionSharpness_v2_157: 0.1
+    aoEdgeDetectionSharpness_v2_158: 0.1
+    aoEdgeDetectionSharpness_v2_159: 0.1
+    aoEdgeDetectionSharpness_v2_160: 0.1
+    aoEdgeDetectionSharpness_v2_161: 0.1
+    aoEdgeDetectionSharpness_v2_162: 0.1
+    aoEdgeDetectionSharpness_v2_163: 0.1
+    aoEdgeDetectionSharpness_v2_164: 0.1
+    aoEdgeDetectionSharpness_v2_165: 0.1
+    aoEdgeDetectionSharpness_v2_166: 0.1
+    aoEdgeDetectionSharpness_v2_167: 0.1
+    aoEdgeDetectionSharpness_v2_168: 0.1
+    aoEdgeDetectionSharpness_v2_169: 0.1
+    aoEdgeDetectionSharpness_v2_170: 0.1
+    aoEdgeDetectionSharpness_v2_171: 0.1
+    aoEdgeDetectionSharpness_v2_172: 0.1
+    aoEdgeDetectionSharpness_v2_173: 0.1
+    aoEdgeDetectionSharpness_v2_174: 0.1
+    aoEdgeDetectionSharpness_v2_175: 0.1
+    aoEdgeDetectionSharpness_v2_176: 0.1
+    aoEdgeDetectionSharpness_v2_177: 0.1
+    aoEdgeDetectionSharpness_v2_178: 0.1
+    aoEdgeDetectionSharpness_v2_179: 0.1
+    aoEdgeDetectionSharpness_v2_180: 0.1
+    aoEdgeDetectionSharpness_v2_181: 0.1
+    aoEdgeDetectionSharpness_v2_182: 0.1
+    aoEdgeDetectionSharpness_v2_183: 0.1
+    aoEdgeDetectionSharpness_v2_184: 0.1
+    aoEdgeDetectionSharpness_v2_185: 0.1
+    aoEdgeDetectionSharpness_v2_186: 0.1
+    aoEdgeDetectionSharpness_v2_187: 0.1
+    aoEdgeDetectionSharpness_v2_188: 0.1
+    aoEdgeDetectionSharpness_v2_189: 0.1
+    aoEdgeDetectionSharpness_v2_190: 0.1
+    aoEdgeDetectionSharpness_v2_191: 0.1
+    aoEdgeDetectionSharpness_v2_192: 0.1
+    aoEdgeDetectionSharpness_v2_193: 0.1
+    aoEdgeDetectionSharpness_v2_194: 0.1
+    aoEdgeDetectionSharpness_v2_195: 0.1
+    aoEdgeDetectionSharpness_v2_196: 0.1
+    aoEdgeDetectionSharpness_v2_197: 0.1
+    aoEdgeDetectionSharpness_v2_198: 0.1
+    aoEdgeDetectionSharpness_v2_199: 0.1
+    aoEdgeDetectionSharpness_v2_200: 0.1
+    aoEdgeDetectionSharpness_v2_201: 0.1
+    aoEdgeDetectionSharpness_v2_202: 0.1
+    aoEdgeDetectionSharpness_v2_203: 0.1
+    aoEdgeDetectionSharpness_v2_204: 0.1
+    aoEdgeDetectionSharpness_v2_205: 0.1
+    aoEdgeDetectionSharpness_v2_206: 0.1
+    aoEdgeDetectionSharpness_v2_207: 0.1
+    aoEdgeDetectionSharpness_v2_208: 0.1
+    aoEdgeDetectionSharpness_v2_209: 0.1
+    aoEdgeDetectionSharpness_v2_210: 0.1
+    aoEdgeDetectionSharpness_v2_211: 0.1
+    aoEdgeDetectionSharpness_v2_212: 0.1
+    aoEdgeDetectionSharpness_v2_213: 0.1
+    aoEdgeDetectionSharpness_v2_214: 0.1
+    aoEdgeDetectionSharpness_v2_215: 0.1
+    aoEdgeDetectionSharpness_v2_216: 0.1
+    aoEdgeDetectionSharpness_v2_217: 0.1
+    aoEdgeDetectionSharpness_v2_218: 0.1
+    aoEdgeDetectionSharpness_v2_219: 0.1
+    aoEdgeDetectionSharpness_v2_220: 0.1
+    aoEdgeDetectionSharpness_v2_221: 0.1
+    aoEdgeDetectionSharpness_v2_222: 0.1
+    aoEdgeDetectionSharpness_v2_223: 0.1
+    aoEdgeDetectionSharpness_v2_224: 0.1
+    aoEdgeDetectionSharpness_v2_225: 0.1
+    aoEdgeDetectionSharpness_v2_226: 0.1
+    aoEdgeDetectionSharpness_v2_227: 0.1
+    aoEdgeDetectionSharpness_v2_228: 0.1
+    aoEdgeDetectionSharpness_v2_229: 0.1
+    aoEdgeDetectionSharpness_v2_230: 0.1
+    aoEdgeDetectionSharpness_v2_231: 0.1
+    aoEdgeDetectionSharpness_v2_232: 0.1
+    aoEdgeDetectionSharpness_v2_233: 0.1
+    aoEdgeDetectionSharpness_v2_234: 0.1
+    aoEdgeDetectionSharpness_v2_235: 0.1
+    aoEdgeDetectionSharpness_v2_236: 0.1
+    aoEdgeDetectionSharpness_v2_237: 0.1
+    aoEdgeDetectionSharpness_v2_238: 0.1
+    aoEdgeDetectionSharpness_v2_239: 0.1
+    aoEdgeDetectionSharpness_v2_240: 0.1
+    aoEdgeDetectionSharpness_v2_241: 0.1
+    aoEdgeDetectionSharpness_v2_242: 0.1
+    aoEdgeDetectionSharpness_v2_243: 0.1
+    aoEdgeDetectionSharpness_v2_244: 0.1
+    aoEdgeDetectionSharpness_v2_245: 0.1
+    aoEdgeDetectionSharpness_v2_246: 0.1
+    aoEdgeDetectionSharpness_v2_247: 0.1
+    aoEdgeDetectionSharpness_v2_248: 0.1
+    aoEdgeDetectionSharpness_v2_249: 0.1
+    aoEdgeDetectionSharpness_v2_250: 0.1
+    aoEdgeDetectionSharpness_v2_251: 0.1
+    aoEdgeDetectionSharpness_v2_252: 0.1
+    aoEdgeDetectionSharpness_v2_253: 0.1
+    aoEdgeDetectionSharpness_v2_254: 0.1
+    aoEdgeDetectionSharpness_v2_255: 0.1
+    aoEdgeDetectionSharpness_v2_256: 0.1
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 1
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 512
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentReferenceSampleCount: 2048
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountCustom: 1000
+    m_SpecCubeCompression: 1
+    m_DirectSampleCount: 64
+    m_IndirectSampleCount: 512
+    m_Bounces: 2
+    m_SamplingFilterMode: 1
+    m_DenoiserTypeDirect: 1
+    m_DenoiserTypeIndirect: 1
+    m_DenoiserTypeAO: 1
+    m_FilterTypeDirect: 0
+    m_FilterTypeIndirect: 0
+    m_FilterTypeAO: 0
+    m_FilterGaussRadiusDirect: 1
+    m_FilterGaussRadiusIndirect: 5
+    m_FilterGaussRadiusAO: 2
+    m_FilterAtrousPositionSigmaDirect: 0.5
+    m_FilterAtrousPositionSigmaIndirect: 2
+    m_FilterAtrousPositionSigmaAO: 1
+    m_PVREnvironmentMIS: 1
+    m_PVREnvironmentSampleCount_v2: 256
+    m_PVREnvironmentReferenceSampleCount_v2: 2048
+    m_PVRFilteringMode_v2: 1
+    m_PVRDenoiserTypeDirect_v2: 1
+    m_PVRDenoiserTypeIndirect_v2: 1
+    m_PVRDenoiserTypeAO_v2: 1
+    m_PVRFilterTypeDirect_v2: 0
+    m_PVRFilterTypeIndirect_v2: 0
+    m_PVRFilterTypeAO_v2: 0
+    m_PVRFilteringGaussRadiusDirect_v2: 1
+    m_PVRFilteringGaussRadiusIndirect_v2: 5
+    m_PVRFilteringGaussRadiusAO_v2: 2
+    m_PVRFilteringAtrousPositionSigmaDirect_v2: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect_v2: 2
+    m_PVRFilteringAtrousPositionSigmaAO_v2: 1
+    m_PVREnvironmentMIS_v2: 1
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 0}
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 3
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    buildHeightMesh: 0
+    accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 100002}
+  - component: {fileID: 100001}
+  m_Layer: 0
+  m_Name: AR Session Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &100002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 100005}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &100001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520bb47c46cf8624696ad3133e94acc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 100004}
+--- !u!1 &100003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 100005}
+  - component: {fileID: 100004}
+  - component: {fileID: 100006}
+  m_Layer: 0
+  m_Name: AR Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &100005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100003}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 100002}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &100004
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100003}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.1
+  far clip plane: 20
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!114 &100006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49661cEf99f0a41419f5c50e37344447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

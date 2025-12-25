@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Shared View - Web Monitor</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glass-container">
+        <header>
+            <h1>AR Shared View</h1>
+            <div id="status-badge" class="badge disconnected">Desconectado</div>
+        </header>
+
+        <main>
+            <div class="video-container">
+                <img id="ar-stream" src="https://images.unsplash.com/photo-1633174524827-db00a6b7bc74?auto=format&fit=crop&q=80&w=1000" alt="AR Stream">
+                <div class="overlay-data">
+                    <p>Posición: <span id="pos-data">0, 0, 0</span></p>
+                    <p>Rotación: <span id="rot-data">0, 0, 0, 0</span></p>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="connect-btn" class="btn-primary">Conectar al Dispositivo</button>
+                <div class="info-panel">
+                    <h3>Datos de Sesión</h3>
+                    <p>Latencia: <span id="latency">0ms</span></p>
+                    <p>FPS: <span id="fps">0</span></p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

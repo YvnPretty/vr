@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!129 &1
+PlayerSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 22
+  productName: AR Shared View
+  companyName: Antigravity
+  defaultInterfaceOrientation: 0
+  allowedInterfaceOrientations:
+    - 1
+    - 2
+    - 3
+    - 4
+  androidMinimumAPILevel: 24
+  androidTargetAPILevel: 33
+  androidGraphicsAPIs:
+    - 1 # Vulkan
+    - 2 # OpenGLES3
+  iphoneCameraUsageDescription: "Requerido para la experiencia de Realidad Aumentada y visualización del entorno."
+  bundleVersion: 1.0
+  bundleCode: 1
+  applicationIdentifier:
+    Android: com.antigravity.arshared
+    iOS: com.antigravity.arshared
+  activeInputHandler: 2 # Both (Old and New Input System)
