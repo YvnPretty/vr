@@ -28,6 +28,7 @@ export default function App() {
   const drawCanvasRef = useRef(null);
   const lastPosRef = useRef({ x: 50, y: 50 });
   const isPinchingRef = useRef(false);
+  const pinchDistRef = useRef(0);
 
   // --- 1. Inicialización de Cámara y Hand Tracking ---
   useEffect(() => {
@@ -69,9 +70,10 @@ export default function App() {
 
         const pinchDist = Math.sqrt(Math.pow(index.x - thumb.x, 2) + Math.pow(index.y - thumb.y, 2));
         const palmDist = Math.sqrt(Math.pow(pinky.x - thumb.x, 2) + Math.pow(pinky.y - thumb.y, 2));
+        pinchDistRef.current = pinchDist;
 
-        const pinching = pinchDist < 0.04;
-        const palmOpen = palmDist > 0.18;
+        const pinching = pinchDist < 0.1; // Umbral más generoso
+        const palmOpen = palmDist > 0.22;
 
         setIsPinching(pinching);
         setIsPalmOpen(palmOpen);
@@ -91,30 +93,35 @@ export default function App() {
           setParticles(prev => [
             ...prev,
             { x: smoothX, y: smoothY, vx: (Math.random() - 0.5) * 2, vy: (Math.random() - 0.5) * 2, life: 1, color: currentColor }
-          ].slice(-20));
+          ].slice(-30));
 
-          setPaths(prev => {
-            const thickness = Math.max(2, 10 - z / 5);
-            if (!isPinchingRef.current) {
-              isPinchingRef.current = true;
-              return [...prev, { points: [{ x: smoothX, y: smoothY }], color: currentColor, thickness }];
-            } else {
+          if (!isPinchingRef.current) {
+            isPinchingRef.current = true;
+            const thickness = Math.max(5, 20 - z / 3);
+            setPaths(prev => [...prev, { points: [{ x: smoothX, y: smoothY }], color: currentColor, thickness }]);
+            console.log("START DRAWING");
+          } else {
+            setPaths(prev => {
               const newPaths = [...prev];
-              const lastPath = newPaths[newPaths.length - 1];
-              if (lastPath) {
-                lastPath.points.push({ x: smoothX, y: smoothY });
+              const lastIdx = newPaths.length - 1;
+              if (lastIdx >= 0) {
+                newPaths[lastIdx] = {
+                  ...newPaths[lastIdx],
+                  points: [...newPaths[lastIdx].points, { x: smoothX, y: smoothY }]
+                };
               }
               return newPaths;
-            }
-          });
+            });
+          }
         } else {
+          if (isPinchingRef.current) console.log("STOP DRAWING");
           isPinchingRef.current = false;
           if (palmOpen) {
             setPaths(prev => prev.map(path => ({
               ...path,
               points: path.points.filter(p => {
                 const d = Math.sqrt(Math.pow(p.x - smoothX, 2) + Math.pow(p.y - smoothY, 2));
-                return d > 8;
+                return d > 12; // Radio de borrado mayor
               })
             })).filter(path => path.points.length > 0));
             setTargetLock(0);
@@ -142,36 +149,68 @@ export default function App() {
       },
       width: 1280,
       height: 720,
+      facingMode: 'environment' // Usar cámara trasera en iPhone
     });
 
-    camera.start();
+    // En iOS, a veces se necesita un gesto del usuario para iniciar
+    const startCamera = () => {
+      camera.start();
+    };
+
+    window.addEventListener('start-camera', startCamera);
+
+    if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+      console.log("iOS detected, waiting for user gesture");
+    } else {
+      camera.start();
+    }
 
     return () => {
       camera.stop();
+      window.removeEventListener('start-camera', startCamera);
       if (handsRef.current) handsRef.current.close();
     };
   }, []);
 
   // --- 2. Lógica de Dibujo y Logs ---
   useEffect(() => {
+    const handleResize = () => {
+      if (drawCanvasRef.current) {
+        drawCanvasRef.current.width = window.innerWidth;
+        drawCanvasRef.current.height = window.innerHeight;
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
     if (!drawCanvasRef.current) return;
     const ctx = drawCanvasRef.current.getContext('2d');
-    drawCanvasRef.current.width = window.innerWidth;
-    drawCanvasRef.current.height = window.innerHeight;
-
     ctx.clearRect(0, 0, drawCanvasRef.current.width, drawCanvasRef.current.height);
 
-    // Dibujar Partículas
-    particles.forEach((p, i) => {
+    // Dibujar Partículas (Sin mutación directa)
+    particles.forEach((p) => {
       ctx.globalAlpha = p.life;
       ctx.fillStyle = p.color;
       ctx.beginPath();
       ctx.arc(p.x * window.innerWidth / 100, p.y * window.innerHeight / 100, 2, 0, Math.PI * 2);
       ctx.fill();
-      p.x += p.vx;
-      p.y += p.vy;
-      p.life -= 0.02;
     });
+
+    // Actualizar partículas en el siguiente frame
+    if (particles.length > 0) {
+      const anim = requestAnimationFrame(() => {
+        setParticles(prev => prev.map(p => ({
+          ...p,
+          x: p.x + p.vx,
+          y: p.y + p.vy,
+          life: p.life - 0.02
+        })).filter(p => p.life > 0));
+      });
+      return () => cancelAnimationFrame(anim);
+    }
     ctx.globalAlpha = 1;
 
     ctx.lineJoin = 'round';
@@ -201,7 +240,8 @@ export default function App() {
         "ENCRYPTING HAND DATA...",
         "JARVIS CORE: STABLE",
         "SYNCING WITH SATELLITE...",
-        "THERMAL SENSORS ACTIVE"
+        "THERMAL SENSORS ACTIVE",
+        `PINCH SENSITIVITY: ${isPinching ? 'HIGH' : 'NORMAL'}`
       ];
       setSystemLogs(prev => [events[Math.floor(Math.random() * events.length)], ...prev.slice(0, 4)]);
     }, 3000);
@@ -223,21 +263,40 @@ export default function App() {
         ref={videoRef}
         autoPlay
         playsInline
+        webkit-playsinline="true"
         muted
         onLoadedMetadata={() => setIsCameraReady(true)}
         className={`absolute top-0 left-0 w-full h-full object-cover z-0 opacity-90 grayscale-[0.2] contrast-125 transition-opacity duration-1000 ${isCameraReady ? 'opacity-90' : 'opacity-0'}`}
       />
 
       {!isCameraReady && !error && (
-        <div className="absolute inset-0 z-50 bg-black flex flex-col items-center justify-center">
-          <RefreshCw className="text-cyan-500 animate-spin mb-4" size={48} />
-          <p className="text-cyan-400 animate-pulse uppercase tracking-[0.2em] text-xs">Inicializando Sensores AR...</p>
+        <div className="absolute inset-0 z-50 bg-black flex flex-col items-center justify-center p-6 text-center">
+          <RefreshCw className="text-cyan-500 animate-spin mb-6" size={64} />
+          <h2 className="text-cyan-400 font-black text-xl mb-2 tracking-[0.3em] uppercase">Jarvis OS v5.5</h2>
+          <p className="text-cyan-500/60 text-xs mb-8 max-w-xs uppercase tracking-widest">Esperando autorización de sensores biométricos...</p>
+
+          <button
+            onClick={() => {
+              if (videoRef.current) {
+                // Forzar inicio en iOS
+                const video = videoRef.current;
+                video.play();
+                // El evento onFrame de MediaPipe se encargará del resto si ya se llamó a camera.start()
+                // Pero para estar seguros, intentamos disparar el inicio de la cámara
+                const event = new CustomEvent('start-camera');
+                window.dispatchEvent(event);
+              }
+            }}
+            className="ar-box px-8 py-4 border-2 border-cyan-500 bg-cyan-500/20 text-cyan-400 font-black tracking-[0.4em] hover:bg-cyan-500 hover:text-white transition-all active:scale-95 pointer-events-auto"
+          >
+            SYNC NEURAL LINK
+          </button>
         </div>
       )}
 
       <canvas
         ref={drawCanvasRef}
-        className="absolute inset-0 z-10 pointer-events-none"
+        className="absolute inset-0 z-35 pointer-events-none"
       />
 
       {/* Holographic Hand Skeleton */}
@@ -449,6 +508,12 @@ export default function App() {
               <div className="flex justify-between">
                 <span>Z-DEPTH:</span>
                 <span className="text-white">{handZ.toFixed(1)}u</span>
+              </div>
+              <div className="flex justify-between">
+                <span>PINCH DIST:</span>
+                <span className={`font-bold ${isPinching ? 'text-green-400' : 'text-yellow-400'}`}>
+                  {pinchDistRef.current?.toFixed(3) || '0.000'}
+                </span>
               </div>
             </div>
           </div>
